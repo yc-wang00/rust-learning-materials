@@ -1,0 +1,63 @@
+use concurrency::Metrics;
+use rand::Rng as _;
+use std::thread;
+
+use anyhow::{Ok, Result};
+
+const N: usize = 2;
+const M: usize = 4;
+
+fn main() {
+    let metrics = Metrics::new();
+
+    println!("metrics: {:?}", metrics);
+
+    // START N workers and M request workers
+    for i in 0..N {
+        worker(i, metrics.clone()); // Arc::clone(&metrics)
+    }
+
+    for _ in 0..M {
+        request_worker(metrics.clone()).unwrap();
+    }
+
+    loop {
+        thread::sleep(std::time::Duration::from_secs(1));
+
+        // print metrics
+        println!("{}", metrics);
+    }
+}
+
+fn worker(idx: usize, metrics: Metrics) {
+    thread::spawn(move || {
+        loop {
+            // do some work
+            let mut rng = rand::thread_rng();
+
+            thread::sleep(std::time::Duration::from_millis(rng.gen_range(100..5000)));
+            metrics.inc(format!("call.thread.worker.{}", idx))?;
+        }
+
+        #[allow(unreachable_code)]
+        Ok(())
+    });
+}
+
+fn request_worker(metrics: Metrics) -> Result<()> {
+    thread::spawn(move || {
+        loop {
+            // do some work
+            let mut rng = rand::thread_rng();
+
+            thread::sleep(std::time::Duration::from_millis(rng.gen_range(50..800)));
+            let page = rng.gen_range(1..=10);
+            metrics.inc(format!("req.page.{}", page))?;
+        }
+
+        #[allow(unreachable_code)]
+        Ok(())
+    });
+
+    Ok(())
+}

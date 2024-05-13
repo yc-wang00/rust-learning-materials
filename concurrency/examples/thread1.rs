@@ -19,7 +19,7 @@ fn main() -> Result<()> {
         thread::spawn(move || producer(i, tx));
     }
     drop(tx);
-    
+
     // create consumer
     let consumer = thread::spawn(move || {
         for msg in rx {
@@ -30,12 +30,14 @@ fn main() -> Result<()> {
         42
     });
 
-    let secret = consumer.join().map_err(|e| anyhow!("Consumer thread panicked: {:?}", e))?;
+    let secret = consumer
+        .join()
+        .map_err(|e| anyhow!("Consumer thread panicked: {:?}", e))?;
     println!("Consumer returned: {}", secret);
     Ok(())
 }
 
-fn producer(idx:usize, tx: mpsc::Sender<Msg>) -> Result<()>{
+fn producer(idx: usize, tx: mpsc::Sender<Msg>) -> Result<()> {
     loop {
         let value = rand::random::<usize>();
         tx.send(Msg::new(idx, value))?;
