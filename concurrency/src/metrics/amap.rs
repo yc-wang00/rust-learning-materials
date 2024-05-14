@@ -35,7 +35,12 @@ impl AMapMetrics {
 impl fmt::Display for AMapMetrics {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         for (key, value) in self.data.iter() {
-            writeln!(f, "{}: {}", key, value.load(std::sync::atomic::Ordering::Relaxed))?;
+            writeln!(
+                f,
+                "{}: {}",
+                key,
+                value.load(std::sync::atomic::Ordering::Relaxed)
+            )?;
         }
 
         Ok(())
