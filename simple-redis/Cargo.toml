@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 bytes = { version = "1.6.0", features = ["serde"] }
+enum_dispatch = "0.3.13"
