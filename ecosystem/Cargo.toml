@@ -13,10 +13,12 @@ dashmap = "5.5.3"
 derive_builder = "0.20.0"
 derive_more = "0.99.17"
 futures = "0.3.30"
+nanoid = "0.4.0"
 opentelemetry = "0.23.0"
 opentelemetry-otlp = { version = "0.16.0", features = ["tonic"] }
 opentelemetry_sdk = { version = "0.23.0", features = ["rt-tokio"] }
 serde = { version = "1.0.197", features = ["derive"] }
+sqlx = { version = "0.7.4", features = ["postgres", "runtime-tokio", "tls-rustls"] }
 strum = { version = "0.26.2", features = ["derive"] }
 thiserror = "1.0.58"
 tokio = { version = "1.37.0", features = ["rt", "rt-multi-thread", "macros"] }
