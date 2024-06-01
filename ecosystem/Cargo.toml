@@ -13,6 +13,7 @@ dashmap = "5.5.3"
 derive_builder = "0.20.0"
 derive_more = "0.99.17"
 futures = "0.3.30"
+http = "1.1.0"
 nanoid = "0.4.0"
 opentelemetry = "0.23.0"
 opentelemetry-otlp = { version = "0.16.0", features = ["tonic"] }

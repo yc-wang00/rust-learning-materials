@@ -615,6 +615,7 @@ dependencies = [
  "derive_builder",
  "derive_more",
  "futures",
+ "http 1.1.0",
  "nanoid",
  "opentelemetry",
  "opentelemetry-otlp",
