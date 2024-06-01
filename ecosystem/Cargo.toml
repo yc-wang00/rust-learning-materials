@@ -12,6 +12,8 @@ derive_more = "0.99.17"
 opentelemetry = "0.23.0"
 opentelemetry-otlp = { version = "0.16.0", features = ["tonic"] }
 opentelemetry_sdk = { version = "0.23.0", features = ["rt-tokio"] }
+serde = { version = "1.0.197", features = ["derive"] }
+strum = { version = "0.26.2", features = ["derive"] }
 thiserror = "1.0.58"
 tracing = "0.1.40"
 tracing-appender = "0.2.3"
