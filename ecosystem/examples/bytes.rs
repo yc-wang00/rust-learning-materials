@@ -10,13 +10,9 @@ fn main() -> Result<()> {
     buf.put_i64(0xdeadbeef);
 
     let a = buf.split();
-    let mut b = buf.freeze();
+    let b = buf.freeze();
+    println!("{:?}", a);
     println!("{:?}", b);
-    let pos = b.binary_search(&10).unwrap();
-
-    let (line, rest) = b.split_at(pos);
-    println!("{:?}", line);
-    println!("{:?}", rest);
 
     Ok(())
 }
