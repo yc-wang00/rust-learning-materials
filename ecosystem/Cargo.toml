@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.81"
 bytes = "1.6.0"
-chrono = "0.4.38"
+chrono = { version = "0.4.38", features = ["serde"] }
 derive_builder = "0.20.0"
 derive_more = "0.99.17"
 opentelemetry = "0.23.0"

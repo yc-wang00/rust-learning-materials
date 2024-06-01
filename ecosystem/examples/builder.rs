@@ -11,13 +11,11 @@ struct User {
 
     #[builder(setter(into, strip_option), default)]
     email: Option<String>,
-
     #[builder(setter(custom))]
     dob: DateTime<Utc>,
 
     #[builder(setter(skip))]
     age: u32,
-
     #[builder(default = "vec![]", setter(each(name = "skill", into)))]
     skills: Vec<String>,
 }
@@ -48,7 +46,6 @@ impl UserBuilder {
         user.age = (Utc::now().year() - user.dob.year()) as _;
         Ok(user)
     }
-
     pub fn dob(&mut self, value: &str) -> &mut Self {
         self.dob = DateTime::parse_from_rfc3339(value)
             .map(|dt| dt.with_timezone(&Utc))
